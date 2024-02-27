@@ -9,7 +9,12 @@ app.post("/sendMail", async (req, res) => {
   const htmlContent = (otp) => {
     return `<p>Your OTP is: <strong>${otp}</strong></p>`;
   };
-  const otp = await otpwizard.sendEmail(Otplength, emailInput, htmlContent);
+  const EmailObj = {
+    subject: "Your One-Time Password IS this please Verify",
+    emailInput,
+    htmlContent,
+  };
+  const otp = await otpwizard.sendEmail(Otplength, EmailObj);
   console.log("OTP sent:", otp);
   res.json({ msg: "Otp Send", otp });
 });
